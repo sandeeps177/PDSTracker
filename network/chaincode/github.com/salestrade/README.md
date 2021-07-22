@@ -16,9 +16,5 @@ git checkout tags/v1.4.0
 
 ```sh
 cd $GOPATH/src
-mkdir -p github.com/blockchain
-cd github.com/blockchain
-git clone https://github.com/suddutt1/workshopchaincode.git . # Do not miss the DOT(.) at the end
-# Complie the code
 go builld
 ```
