@@ -1,0 +1,76 @@
+OrdererOrgs:
+- Domain: supplychain.net
+  Name: Orderer
+  Specs:
+  - SANS:
+    - localhost
+  Template:
+    Count: 1
+    Hostname: orderer{{.Index}}
+PeerOrgs:
+- CA:
+    Hostname: ca
+  Domain: fps.com
+  EnableNodeOUs: true
+  Name: FPS
+  Template:
+    Count: 1
+    SANS:
+    - localhost
+  Users:
+    Count: 5
+- CA:
+    Hostname: ca
+  Domain: fcipurchasecentre.net
+  EnableNodeOUs: true
+  Name: FCIPC
+  Template:
+    Count: 1
+    SANS:
+    - localhost
+  Users:
+    Count: 5
+- CA:
+    Hostname: ca
+  Domain: ssfciwarehouse.net
+  EnableNodeOUs: true
+  Name: SSFciWarehouse
+  Template:
+    Count: 1
+    SANS:
+    - localhost
+  Users:
+    Count: 5
+- CA:
+    Hostname: ca
+  Domain: dsfciwarehouse.net
+  EnableNodeOUs: true
+  Name: DSFciWarehouse
+  Template:
+    Count: 1
+    SANS:
+    - localhost
+  Users:
+    Count: 5
+- CA:
+    Hostname: ca
+  Domain: dszonalwarehouse.net
+  EnableNodeOUs: true
+  Name: DSZonalWarehouse
+  Template:
+    Count: 1
+    SANS:
+    - localhost
+  Users:
+    Count: 5
+- CA:
+    Hostname: ca
+  Domain: logistics.com
+  EnableNodeOUs: true
+  Name: Logistics
+  Template:
+    Count: 1
+    SANS:
+    - localhost
+  Users:
+    Count: 5

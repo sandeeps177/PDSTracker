@@ -1,0 +1,66 @@
+
+{
+    "fabricVersion":"1.4.2",
+    "orderers":{
+        "name" :"Orderer","mspID":"OrdererMSP","domain":"supplychain.net","ordererHostname":"orderer","SANS":"localhost","type":"raft","haCount":1
+    },
+    "addCA":"true",
+    "orgs":[
+        { 
+            "name" :"FPS",
+            "domain":"fps.com",
+            "mspID":"FPSMSP",
+            "SANS":"localhost",
+            "peerCount":1,
+            "userCount":5
+        },
+        { 
+            "name" :"FCIPC",
+            "domain":"fcipurchasecentre.net",
+            "mspID":"FCIPCMSP",
+            "SANS":"localhost",
+            "peerCount":1,
+            "userCount":5
+        },
+        { 
+            "name" :"SSFciWarehouse",
+            "domain":"ssfciwarehouse.net",
+            "mspID":"SSFciWarehouseMSP",
+            "SANS":"localhost",
+            "peerCount":1,
+            "userCount":5
+        },
+        { 
+            "name" :"DSFciWarehouse",
+            "domain":"dsfciwarehouse.net",
+            "mspID":"DSFciWarehouseMSP",
+            "SANS":"localhost",
+            "peerCount":1,
+            "userCount":5
+        },
+        { 
+            "name" :"DSZonalWarehouse",
+            "domain":"dszonalwarehouse.net",
+            "mspID":"DSZonalWarehouseMSP",
+            "SANS":"localhost",
+            "peerCount":1,
+            "userCount":5
+        },
+        { 
+            "name" :"Logistics",
+            "domain":"logistics.com",
+            "mspID":"LogisticsMSP",
+            "SANS":"localhost",
+            "peerCount":1,
+            "userCount":5
+        }
+        ],
+    "consortium":"SupplyChainConsortium",
+    "channels" :[
+                    {"channelName":"trace","orgs":["FPS","FCIPC","SSFciWarehouse","DSFciWarehouse","DSZonalWarehouse","Logistics"] }
+                ],
+    "chaincodes":[{"channelName":"trace","ccid":"salestrade","version":"1.0","src":"github.com/salestrade","participants":["FPS","FCIPC","SSFciWarehouse","DSFciWarehouse","DSZonalWarehouse","Logistics"]}]            
+                
+}
+
+

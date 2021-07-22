@@ -1,0 +1,132 @@
+version: 1.0.0
+client:
+  organization: dsfciwarehouse
+  logging:
+    level: debug
+  peer:
+    timeout:
+      connection: 100s
+      discovery:
+        greylistExpiry: 100s
+      response: 600s
+  orderer:
+    timeout:
+      connection: 100s
+      response: 600s
+  global:
+    timeout:
+      execute: 180s
+      query: 180s
+      resmgmt: 180s
+  cryptoconfig:
+    path: /home/hp/projects/PDStrace/network/crypto-config
+  credentialStore:
+    cryptoStore:
+      path: ./tmpdsfciwarehousemsp/msp
+    path: ./tmpdsfciwarehousemsp/state-store
+  BCCSP:
+    security:
+      default:
+        provider: SW
+      enabled: true
+      hashAlgorithm: SHA2
+      level: 256
+      softVerify: false
+  tlsCerts:
+    systemCertPool: false
+channels:
+  trace:
+    orderers:
+    - orderer0.supplychain.net
+    peers:
+      peer0.dsfciwarehouse.net:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+    policies:
+      discovery:
+        maxTargets: 1
+        retryOpts:
+          attempts: 2
+          backoffFactor: 2
+          initialBackoff: 500ms
+          maxBackoff: 5s
+      eventService:
+        balancer: Random
+        blockHeightLagThreshold: 5
+        peerMonitorPeriod: 6s
+        reconnectBlockHeightLagThreshold: 8
+        resolverStrategy: PreferOrg
+      queryChannelConfig:
+        maxTargets: 1
+        minResponses: 1
+        retryOpts:
+          attempts: 2
+          backoffFactor: 1
+          initialBackoff: 500ms
+          maxBackoff: 5s
+orderers:
+  orderer0.supplychain.net:
+    url: orderer0.supplychain.net:7050
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 20s
+      keep-alive-timeout: 100s
+      ssl-target-name-override: orderer0.supplychain.net
+    tlsCACerts:
+      path: /home/hp/projects/PDStrace/network/crypto-config/ordererOrganizations/supplychain.net/tlsca/tlsca.supplychain.net-cert.pem
+peers:
+  peer0.dsfciwarehouse.net:
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 20s
+      keep-alive-timeout: 100s
+      ssl-target-name-override: peer0.dsfciwarehouse.net
+    tlsCACerts:
+      path: /home/hp/projects/PDStrace/network/crypto-config/peerOrganizations/dsfciwarehouse.net/tlsca/tlsca.dsfciwarehouse.net-cert.pem
+organizations:
+  dsfciwarehouse:
+    mspid: DSFciWarehouseMSP
+    cryptoPath: peerOrganizations/dsfciwarehouse.net/users/{username}@dsfciwarehouse.net/msp
+    certificateAuthorities:
+    - dsfciwarehouse-ca
+    peers:
+    - peer0.dsfciwarehouse.net
+  ordererorg:
+    mspID: OrdererMSP
+    cryptoPath: ordererOrganizations/supplychain.net/users/{username}@supplychain.net/msp
+certificateAuthorities:
+  dsfciwarehouse-ca:
+    url: https://ca.dsfciwarehouse.net:10054
+    httpsOptions:
+      verify: false
+    tlsCACerts:
+      path: /home/hp/projects/PDStrace/network/crypto-config/peerOrganizations/dsfciwarehouse.net/ca/ca.dsfciwarehouse.net-cert.pem
+    caName: DSFciWarehouseCA
+    registrar:
+      enrollId: admin
+      enrollSecret: adminpw
+entityMatchers:
+  certificateAuthority:
+  - mappedHost: ca.dsfciwarehouse.net
+    pattern: ca.dsfciwarehouse.net
+    sslTargetOverrideUrlSubstitutionExp: ca.dsfciwarehouse.net
+    urlSubstitutionExp: ca.dsfciwarehouse.net:10054
+  orderer:
+  - eventUrlSubstitutionExp: orderer0.supplychain.net:7050
+    mappedHost: orderer0.supplychain.net
+    pattern: orderer0.supplychain.net
+    sslTargetOverrideUrlSubstitutionExp: orderer0.supplychain.net
+    urlSubstitutionExp: orderer0.supplychain.net:7050
+  peer:
+  - eventUrlSubstitutionExp: peer0.dsfciwarehouse.net:10053
+    mappedHost: peer0.dsfciwarehouse.net
+    pattern: peer0.dsfciwarehouse.net
+    sslTargetOverrideUrlSubstitutionExp: peer0.dsfciwarehouse.net
+    urlSubstitutionExp: peer0.dsfciwarehouse.net:10051
+X-OrgCA: DSFciWarehouseCA

@@ -1,0 +1,419 @@
+version: "2"
+networks:
+  fabricnetwork: {}
+services:
+  ca.dsfciwarehouse.net:
+    container_name: ca.dsfciwarehouse.net
+    extends:
+      file: base.yaml
+      service: ca
+    environment:
+    - FABRIC_CA_SERVER_CA_NAME=DSFciWarehouseCA
+    - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.dsfciwarehouse.net-cert.pem
+    - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ebef6221296f60f77443e210bf38b1c7747d3d5a6e92a054305d1101a31f3369_sk
+    - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.dsfciwarehouse.net-cert.pem
+    - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ebef6221296f60f77443e210bf38b1c7747d3d5a6e92a054305d1101a31f3369_sk
+    working_dir: /opt/ws
+    volumes:
+    - ./crypto-config/peerOrganizations/dsfciwarehouse.net/ca/:/etc/hyperledger/fabric-ca-server-config
+    - ./:/opt/ws
+    ports:
+    - 10054:7054
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  ca.dszonalwarehouse.net:
+    container_name: ca.dszonalwarehouse.net
+    extends:
+      file: base.yaml
+      service: ca
+    environment:
+    - FABRIC_CA_SERVER_CA_NAME=DSZonalWarehouseCA
+    - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.dszonalwarehouse.net-cert.pem
+    - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/8d3ffe1225141a7947f300b1d0565b90569c1c216c9e871a81539448d2b13c7d_sk
+    - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.dszonalwarehouse.net-cert.pem
+    - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/8d3ffe1225141a7947f300b1d0565b90569c1c216c9e871a81539448d2b13c7d_sk
+    working_dir: /opt/ws
+    volumes:
+    - ./crypto-config/peerOrganizations/dszonalwarehouse.net/ca/:/etc/hyperledger/fabric-ca-server-config
+    - ./:/opt/ws
+    ports:
+    - 11054:7054
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  ca.fcipurchasecentre.net:
+    container_name: ca.fcipurchasecentre.net
+    extends:
+      file: base.yaml
+      service: ca
+    environment:
+    - FABRIC_CA_SERVER_CA_NAME=FCIPCCA
+    - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.fcipurchasecentre.net-cert.pem
+    - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0ea2b63fa8726d6f9a3b5915c405952f08ca27764e4b6beddcc58e5bd6d96fb1_sk
+    - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.fcipurchasecentre.net-cert.pem
+    - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0ea2b63fa8726d6f9a3b5915c405952f08ca27764e4b6beddcc58e5bd6d96fb1_sk
+    working_dir: /opt/ws
+    volumes:
+    - ./crypto-config/peerOrganizations/fcipurchasecentre.net/ca/:/etc/hyperledger/fabric-ca-server-config
+    - ./:/opt/ws
+    ports:
+    - 8054:7054
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  ca.fps.com:
+    container_name: ca.fps.com
+    extends:
+      file: base.yaml
+      service: ca
+    environment:
+    - FABRIC_CA_SERVER_CA_NAME=FPSCA
+    - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.fps.com-cert.pem
+    - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/fd4c63df6c4a042e594830b4e6c495fa3095bd0381bef2c94104f57e3bb8d400_sk
+    - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.fps.com-cert.pem
+    - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/fd4c63df6c4a042e594830b4e6c495fa3095bd0381bef2c94104f57e3bb8d400_sk
+    working_dir: /opt/ws
+    volumes:
+    - ./crypto-config/peerOrganizations/fps.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    - ./:/opt/ws
+    ports:
+    - 7054:7054
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  ca.logistics.com:
+    container_name: ca.logistics.com
+    extends:
+      file: base.yaml
+      service: ca
+    environment:
+    - FABRIC_CA_SERVER_CA_NAME=LogisticsCA
+    - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.logistics.com-cert.pem
+    - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ec5c57fdde87213c82d22bccfe87c3bd0bf7af21c2c85c6189c47a3ba3cdbab9_sk
+    - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.logistics.com-cert.pem
+    - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ec5c57fdde87213c82d22bccfe87c3bd0bf7af21c2c85c6189c47a3ba3cdbab9_sk
+    working_dir: /opt/ws
+    volumes:
+    - ./crypto-config/peerOrganizations/logistics.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    - ./:/opt/ws
+    ports:
+    - 12054:7054
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  ca.ssfciwarehouse.net:
+    container_name: ca.ssfciwarehouse.net
+    extends:
+      file: base.yaml
+      service: ca
+    environment:
+    - FABRIC_CA_SERVER_CA_NAME=SSFciWarehouseCA
+    - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.ssfciwarehouse.net-cert.pem
+    - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/555d2322e42b93585d754774b30a3ed9aa81bd37a9163a64982d1d4ee71e7d6f_sk
+    - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.ssfciwarehouse.net-cert.pem
+    - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/555d2322e42b93585d754774b30a3ed9aa81bd37a9163a64982d1d4ee71e7d6f_sk
+    working_dir: /opt/ws
+    volumes:
+    - ./crypto-config/peerOrganizations/ssfciwarehouse.net/ca/:/etc/hyperledger/fabric-ca-server-config
+    - ./:/opt/ws
+    ports:
+    - 9054:7054
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  cli:
+    image: hyperledger/fabric-tools:${TOOLS_TAG}
+    container_name: cli
+    tty: true
+    environment:
+    - CORE_PEER_TLS_ENABLED=true
+    - GOPATH=/opt/gopath
+    - FABRIC_LOGGING_SPEC=DEBUG
+    - CORE_PEER_ID=cli
+    - GODEBUG=netdns=go
+    working_dir: /opt/ws
+    volumes:
+    - /var/run/:/host/var/run/
+    - ./:/opt/ws
+    - ./chaincode/github.com:/opt/gopath/src/github.com
+    depends_on:
+    - orderer0.supplychain.net
+    - peer0.fps.com
+    - peer0.fcipurchasecentre.net
+    - peer0.ssfciwarehouse.net
+    - peer0.dsfciwarehouse.net
+    - peer0.dszonalwarehouse.net
+    - peer0.logistics.com
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  couch0:
+    container_name: couch0
+    extends:
+      file: base.yaml
+      service: couchdb
+    volumes:
+    - ./worldstate/couch0:/opt/couchdb/data
+    ports:
+    - 5984:5984
+    networks:
+    - fabricnetwork
+  couch1:
+    container_name: couch1
+    extends:
+      file: base.yaml
+      service: couchdb
+    volumes:
+    - ./worldstate/couch1:/opt/couchdb/data
+    ports:
+    - 6984:5984
+    networks:
+    - fabricnetwork
+  couch2:
+    container_name: couch2
+    extends:
+      file: base.yaml
+      service: couchdb
+    volumes:
+    - ./worldstate/couch2:/opt/couchdb/data
+    ports:
+    - 7984:5984
+    networks:
+    - fabricnetwork
+  couch3:
+    container_name: couch3
+    extends:
+      file: base.yaml
+      service: couchdb
+    volumes:
+    - ./worldstate/couch3:/opt/couchdb/data
+    ports:
+    - 8984:5984
+    networks:
+    - fabricnetwork
+  couch4:
+    container_name: couch4
+    extends:
+      file: base.yaml
+      service: couchdb
+    volumes:
+    - ./worldstate/couch4:/opt/couchdb/data
+    ports:
+    - 9984:5984
+    networks:
+    - fabricnetwork
+  couch5:
+    container_name: couch5
+    extends:
+      file: base.yaml
+      service: couchdb
+    volumes:
+    - ./worldstate/couch5:/opt/couchdb/data
+    ports:
+    - 10984:5984
+    networks:
+    - fabricnetwork
+  orderer0.supplychain.net:
+    container_name: orderer0.supplychain.net
+    extends:
+      file: base.yaml
+      service: orderer
+    volumes:
+    - ./blocks/orderer0supplychainnet:/var/hyperledger/production/orderer
+    - ./genesis.block:/var/hyperledger/orderer/genesis.block
+    - ./crypto-config/ordererOrganizations/supplychain.net/orderers/orderer0.supplychain.net/msp:/var/hyperledger/orderer/msp
+    - ./crypto-config/ordererOrganizations/supplychain.net/orderers/orderer0.supplychain.net/tls/:/var/hyperledger/orderer/tls
+    ports:
+    - 7050:7050
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  peer0.dsfciwarehouse.net:
+    container_name: peer0.dsfciwarehouse.net
+    extends:
+      file: base.yaml
+      service: peer
+    environment:
+    - CORE_PEER_ID=peer0.dsfciwarehouse.net
+    - CORE_PEER_ADDRESS=peer0.dsfciwarehouse.net:7051
+    - CORE_PEER_CHAINCODELISTENADDRESS=peer0.dsfciwarehouse.net:7052
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.dsfciwarehouse.net:7051
+    - CORE_PEER_EVENTS_ADDRESS=peer0.dsfciwarehouse.net:7053
+    - CORE_PEER_LOCALMSPID=DSFciWarehouseMSP
+    - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+    - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couch3:5984
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.dsfciwarehouse.net:7051
+    volumes:
+    - ./blocks/peer0dsfciwarehousenet:/var/hyperledger/production
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/dsfciwarehouse.net/peers/peer0.dsfciwarehouse.net/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/dsfciwarehouse.net/peers/peer0.dsfciwarehouse.net/tls:/etc/hyperledger/fabric/tls
+    ports:
+    - 10051:7051
+    - 10053:7053
+    depends_on:
+    - couch3
+    - orderer0.supplychain.net
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  peer0.dszonalwarehouse.net:
+    container_name: peer0.dszonalwarehouse.net
+    extends:
+      file: base.yaml
+      service: peer
+    environment:
+    - CORE_PEER_ID=peer0.dszonalwarehouse.net
+    - CORE_PEER_ADDRESS=peer0.dszonalwarehouse.net:7051
+    - CORE_PEER_CHAINCODELISTENADDRESS=peer0.dszonalwarehouse.net:7052
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.dszonalwarehouse.net:7051
+    - CORE_PEER_EVENTS_ADDRESS=peer0.dszonalwarehouse.net:7053
+    - CORE_PEER_LOCALMSPID=DSZonalWarehouseMSP
+    - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+    - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couch4:5984
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.dszonalwarehouse.net:7051
+    volumes:
+    - ./blocks/peer0dszonalwarehousenet:/var/hyperledger/production
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/dszonalwarehouse.net/peers/peer0.dszonalwarehouse.net/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/dszonalwarehouse.net/peers/peer0.dszonalwarehouse.net/tls:/etc/hyperledger/fabric/tls
+    ports:
+    - 11051:7051
+    - 11053:7053
+    depends_on:
+    - couch4
+    - orderer0.supplychain.net
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  peer0.fcipurchasecentre.net:
+    container_name: peer0.fcipurchasecentre.net
+    extends:
+      file: base.yaml
+      service: peer
+    environment:
+    - CORE_PEER_ID=peer0.fcipurchasecentre.net
+    - CORE_PEER_ADDRESS=peer0.fcipurchasecentre.net:7051
+    - CORE_PEER_CHAINCODELISTENADDRESS=peer0.fcipurchasecentre.net:7052
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.fcipurchasecentre.net:7051
+    - CORE_PEER_EVENTS_ADDRESS=peer0.fcipurchasecentre.net:7053
+    - CORE_PEER_LOCALMSPID=FCIPCMSP
+    - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+    - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couch1:5984
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.fcipurchasecentre.net:7051
+    volumes:
+    - ./blocks/peer0fcipurchasecentrenet:/var/hyperledger/production
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/fcipurchasecentre.net/peers/peer0.fcipurchasecentre.net/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/fcipurchasecentre.net/peers/peer0.fcipurchasecentre.net/tls:/etc/hyperledger/fabric/tls
+    ports:
+    - 8051:7051
+    - 8053:7053
+    depends_on:
+    - couch1
+    - orderer0.supplychain.net
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  peer0.fps.com:
+    container_name: peer0.fps.com
+    extends:
+      file: base.yaml
+      service: peer
+    environment:
+    - CORE_PEER_ID=peer0.fps.com
+    - CORE_PEER_ADDRESS=peer0.fps.com:7051
+    - CORE_PEER_CHAINCODELISTENADDRESS=peer0.fps.com:7052
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.fps.com:7051
+    - CORE_PEER_EVENTS_ADDRESS=peer0.fps.com:7053
+    - CORE_PEER_LOCALMSPID=FPSMSP
+    - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+    - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couch0:5984
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.fps.com:7051
+    volumes:
+    - ./blocks/peer0fpscom:/var/hyperledger/production
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/fps.com/peers/peer0.fps.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/fps.com/peers/peer0.fps.com/tls:/etc/hyperledger/fabric/tls
+    ports:
+    - 7051:7051
+    - 7053:7053
+    depends_on:
+    - couch0
+    - orderer0.supplychain.net
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  peer0.logistics.com:
+    container_name: peer0.logistics.com
+    extends:
+      file: base.yaml
+      service: peer
+    environment:
+    - CORE_PEER_ID=peer0.logistics.com
+    - CORE_PEER_ADDRESS=peer0.logistics.com:7051
+    - CORE_PEER_CHAINCODELISTENADDRESS=peer0.logistics.com:7052
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.logistics.com:7051
+    - CORE_PEER_EVENTS_ADDRESS=peer0.logistics.com:7053
+    - CORE_PEER_LOCALMSPID=LogisticsMSP
+    - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+    - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couch5:5984
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.logistics.com:7051
+    volumes:
+    - ./blocks/peer0logisticscom:/var/hyperledger/production
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/logistics.com/peers/peer0.logistics.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/logistics.com/peers/peer0.logistics.com/tls:/etc/hyperledger/fabric/tls
+    ports:
+    - 12051:7051
+    - 12053:7053
+    depends_on:
+    - couch5
+    - orderer0.supplychain.net
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1
+  peer0.ssfciwarehouse.net:
+    container_name: peer0.ssfciwarehouse.net
+    extends:
+      file: base.yaml
+      service: peer
+    environment:
+    - CORE_PEER_ID=peer0.ssfciwarehouse.net
+    - CORE_PEER_ADDRESS=peer0.ssfciwarehouse.net:7051
+    - CORE_PEER_CHAINCODELISTENADDRESS=peer0.ssfciwarehouse.net:7052
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.ssfciwarehouse.net:7051
+    - CORE_PEER_EVENTS_ADDRESS=peer0.ssfciwarehouse.net:7053
+    - CORE_PEER_LOCALMSPID=SSFciWarehouseMSP
+    - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+    - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couch2:5984
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.ssfciwarehouse.net:7051
+    volumes:
+    - ./blocks/peer0ssfciwarehousenet:/var/hyperledger/production
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/ssfciwarehouse.net/peers/peer0.ssfciwarehouse.net/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/ssfciwarehouse.net/peers/peer0.ssfciwarehouse.net/tls:/etc/hyperledger/fabric/tls
+    ports:
+    - 9051:7051
+    - 9053:7053
+    depends_on:
+    - couch2
+    - orderer0.supplychain.net
+    networks:
+    - fabricnetwork
+    extra_hosts:
+    - myhost:127.0.0.1

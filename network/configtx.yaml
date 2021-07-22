@@ -1,0 +1,241 @@
+
+Organizations:
+    - &OrdererOrg
+            Name: OrdererMSP
+            ID: OrdererMSP
+            MSPDir: crypto-config/ordererOrganizations/supplychain.net/msp
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('OrdererMSP.member')"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('OrdererMSP.member')"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('OrdererMSP.admin')"
+
+    
+    - &FPSOrg
+            Name: FPSMSP
+            ID: FPSMSP
+            MSPDir: crypto-config/peerOrganizations/fps.com/msp
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('FPSMSP.admin', 'FPSMSP.peer', 'FPSMSP.client' )"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('FPSMSP.admin', 'FPSMSP.client' )"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('FPSMSP.admin')"
+            AnchorPeers:
+              - Host: peer0.fps.com
+                Port: 7051
+    
+    - &FCIPCOrg
+            Name: FCIPCMSP
+            ID: FCIPCMSP
+            MSPDir: crypto-config/peerOrganizations/fcipurchasecentre.net/msp
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('FCIPCMSP.admin', 'FCIPCMSP.peer', 'FCIPCMSP.client' )"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('FCIPCMSP.admin', 'FCIPCMSP.client' )"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('FCIPCMSP.admin')"
+            AnchorPeers:
+              - Host: peer0.fcipurchasecentre.net
+                Port: 7051
+    
+    - &SSFciWarehouseOrg
+            Name: SSFciWarehouseMSP
+            ID: SSFciWarehouseMSP
+            MSPDir: crypto-config/peerOrganizations/ssfciwarehouse.net/msp
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('SSFciWarehouseMSP.admin', 'SSFciWarehouseMSP.peer', 'SSFciWarehouseMSP.client' )"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('SSFciWarehouseMSP.admin', 'SSFciWarehouseMSP.client' )"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('SSFciWarehouseMSP.admin')"
+            AnchorPeers:
+              - Host: peer0.ssfciwarehouse.net
+                Port: 7051
+    
+    - &DSFciWarehouseOrg
+            Name: DSFciWarehouseMSP
+            ID: DSFciWarehouseMSP
+            MSPDir: crypto-config/peerOrganizations/dsfciwarehouse.net/msp
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('DSFciWarehouseMSP.admin', 'DSFciWarehouseMSP.peer', 'DSFciWarehouseMSP.client' )"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('DSFciWarehouseMSP.admin', 'DSFciWarehouseMSP.client' )"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('DSFciWarehouseMSP.admin')"
+            AnchorPeers:
+              - Host: peer0.dsfciwarehouse.net
+                Port: 7051
+    
+    - &DSZonalWarehouseOrg
+            Name: DSZonalWarehouseMSP
+            ID: DSZonalWarehouseMSP
+            MSPDir: crypto-config/peerOrganizations/dszonalwarehouse.net/msp
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('DSZonalWarehouseMSP.admin', 'DSZonalWarehouseMSP.peer', 'DSZonalWarehouseMSP.client' )"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('DSZonalWarehouseMSP.admin', 'DSZonalWarehouseMSP.client' )"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('DSZonalWarehouseMSP.admin')"
+            AnchorPeers:
+              - Host: peer0.dszonalwarehouse.net
+                Port: 7051
+    
+    - &LogisticsOrg
+            Name: LogisticsMSP
+            ID: LogisticsMSP
+            MSPDir: crypto-config/peerOrganizations/logistics.com/msp
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('LogisticsMSP.admin', 'LogisticsMSP.peer', 'LogisticsMSP.client' )"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('LogisticsMSP.admin', 'LogisticsMSP.client' )"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('LogisticsMSP.admin')"
+            AnchorPeers:
+              - Host: peer0.logistics.com
+                Port: 7051
+    
+
+Capabilities:
+    Channel: &ChannelCapabilities
+        V1_4_2: true
+    Orderer: &OrdererCapabilities
+        V1_4_2: true
+    Application: &ApplicationCapabilities
+        V1_4_2: true
+        V1_2: false
+        V1_1: false
+
+Application: &ApplicationDefaults
+    Organizations:
+
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+
+    Capabilities:
+        <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+    OrdererType: etcdraft
+    Addresses:
+          - orderer0.supplychain.net:7050
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 98 MB
+        PreferredMaxBytes: 1024 KB
+    EtcdRaft:
+        Consenters:
+          
+            - Host: orderer0.supplychain.net
+              Port: 7050
+              ClientTLSCert: crypto-config/ordererOrganizations/supplychain.net/orderers/orderer0.supplychain.net/tls/server.crt
+              ServerTLSCert: crypto-config/ordererOrganizations/supplychain.net/orderers/orderer0.supplychain.net/tls/server.crt
+           
+    Organizations:
+        - *OrdererOrg
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        BlockValidation:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+    Capabilities:
+        <<: *OrdererCapabilities
+
+Channel: &ChannelDefaults
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+    Capabilities:
+        <<: *ChannelCapabilities
+
+Profiles:
+    OrdererGenesis:
+        <<: *ChannelDefaults
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities 
+        Consortiums:
+            SupplyChainConsortium:
+                Organizations:
+                   - *FPSOrg
+                   - *FCIPCOrg
+                   - *SSFciWarehouseOrg
+                   - *DSFciWarehouseOrg
+                   - *DSZonalWarehouseOrg
+                   - *LogisticsOrg
+                   
+        
+    
+    trace:
+        Consortium: SupplyChainConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+              - *FPSOrg
+              - *FCIPCOrg
+              - *SSFciWarehouseOrg
+              - *DSFciWarehouseOrg
+              - *DSZonalWarehouseOrg
+              - *LogisticsOrg
+              
+            Capabilities:
+              <<: *ApplicationCapabilities
+    
+        
+
