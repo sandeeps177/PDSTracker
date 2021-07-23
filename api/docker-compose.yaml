@@ -1,0 +1,70 @@
+version: "2"
+networks:
+  api_net: {}
+services:
+  fps:
+    image: swaggerapi/swagger-ui:latest
+    container_name: fps
+    environment:
+       SWAGGER_JSON: /data/apispec-fps.yaml
+    volumes:
+      - ./:/data/
+    ports:
+      - 8080:8080  
+    networks: 
+      - api_net
+  fcipc:
+    image: swaggerapi/swagger-ui:latest
+    container_name: fcipc
+    environment:
+       SWAGGER_JSON: /data/apispec-fcipc.yaml
+    volumes:
+      - ./:/data/
+    ports:
+      - 8081:8080  
+    networks: 
+      - api_net
+  ssfciw:
+    image: swaggerapi/swagger-ui:latest
+    container_name: ssfciw
+    environment:
+       SWAGGER_JSON: /data/apispec-ssfciw.yaml
+    volumes:
+      - ./:/data/
+    ports:
+      - 8082:8080  
+    networks: 
+      - api_net
+  dsfciw:
+    image: swaggerapi/swagger-ui:latest
+    container_name: dsfciw
+    environment:
+       SWAGGER_JSON: /data/apispec-dsfciw.yaml
+    volumes:
+      - ./:/data/
+    ports:
+      - 8083:8080  
+    networks: 
+      - api_net 
+  dszonalw:
+    image: swaggerapi/swagger-ui:latest
+    container_name: dszonalw
+    environment:
+       SWAGGER_JSON: /data/apispec-dszonalw.yaml
+    volumes:
+      - ./:/data/
+    ports:
+      - 8084:8080  
+    networks: 
+      - api_net
+  logistics:
+    image: swaggerapi/swagger-ui:latest
+    container_name: logistics
+    environment:
+       SWAGGER_JSON: /data/apispec-logistics.yaml
+    volumes:
+      - ./:/data/
+    ports:
+      - 8085:8080  
+    networks: 
+      - api_net 

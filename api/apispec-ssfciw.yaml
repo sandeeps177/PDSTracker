@@ -1,0 +1,146 @@
+swagger: "2.0"
+info:
+  description: "REST API Specification for Hyperleder Fabric REST API"
+  version: "1.0.0"
+  title: "Surplus State FCI Warehouse"
+  contact:
+    email: "xyz@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:9092"
+basePath: "/api"
+tags:
+- name: "trxn"
+  description: "Everything related to fabric ledgeder read and write"
+
+- name: "usermgmt"
+  description: "User access related"
+schemes:
+- "http"
+paths:
+  /invoke:
+    post:
+      tags:
+      - "trxn"
+      summary: "Invoke a transaction"
+      description: ""
+      operationId: "invoke"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Transaction input specification"
+        required: true
+        schema:
+          $ref: "#/definitions/TransactionInput"
+      responses:
+        200:
+          description: "API response"
+          schema:
+            $ref: "#/definitions/TransactionResponse"  
+  /query:
+    post:
+      tags:
+      - "trxn"
+      summary: "Query ledger"
+      description: ""
+      operationId: "query"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Transaction input specification"
+        required: true
+        schema:
+          $ref: "#/definitions/TransactionInput"
+      responses:
+        200:
+          description: "API response"
+          schema:
+            $ref: "#/definitions/TransactionResponse"
+  /enrolluser:
+    post:
+      tags:
+      - "usermgmt"
+      summary: "Entoll blockchain user in CA"
+      description: ""
+      operationId: "enroll"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User enrollment request"
+        required: true
+        schema:
+          $ref: "#/definitions/UserEnrollmentRequest"
+      responses:
+        200:
+          description: "API response"
+          schema:
+            $ref: "#/definitions/TransactionResponse"          
+
+definitions:
+  UserEnrollmentRequest:
+    type: "object"
+    properties:
+      userId:
+       type: "string"
+       description: "User ID to enroll"
+      secret:
+       type: "string"
+       description: "User secret"
+      role: 
+       type: "string"
+       description: "User role in the blockchain peer"
+  TransactionInput:
+    type: "object"
+    properties:
+      channelID:
+        type: "string"
+        description: "Channel ID"
+      ccId:
+        type: "string"
+        description: "Chaincode ID"  
+      userId:
+        type: "string"
+        description: "Blockchain user id"
+      funcName:
+        type: "string"
+        description: "Chaincode function to invoke"      
+      args:
+        type: "array"
+        description: "Function inputs"
+        items:
+          type: "string"
+      peers:
+        type: "array" 
+        description: "Peers to ivoke the transaction"
+        items:
+          type: "string"
+  TransactionResponse:
+     type: "object"
+     properties:
+       isSuccess:
+         type: "boolean"
+         description: "Returns if the call to blockchain succeeds"
+       payload:
+         type: "object"
+         description: "Response payload of the transaction"
+       message:
+         type: "string"
+         description: "Error message if any"
+       serverTs:
+         type: "string"
+         description: "Server timestamp yyyy.mm.dd.hh.mm.sss format"
+        
+    
